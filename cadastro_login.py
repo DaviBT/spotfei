@@ -38,20 +38,12 @@ def sair():
     print("Saindo...")
     exit() # Encerra o programa
 
-
-def adm():
-    a = 0
-
-def usuario():
-    escolha_login_ou_cadastro()
-
-    
-
-
+# menu para o usuario selecionar se ja possui uma conta ou nao
 menu_login_ou_cadastro = {
     1: "Novo usuário",
     2: "Logar em uma conta"
     }
+
 def escolha_login_ou_cadastro():
         """
         Função principal que exibe o menu e chama as funções correspondentes
@@ -59,14 +51,16 @@ def escolha_login_ou_cadastro():
         """
         while True: # Loop infinito
             escolha = exibir_menu_login_ou_cadastro() # Chama a função exibir_menu e armazena a escolha do usuário
-            if escolha == 1: # Novo contato
-                cadastro() # Chama a função novo_contato
-            elif escolha == 2: # Procurar contato
+            if escolha == 1: # Novo usuario
+                cadastro() # Chama a função cadastro
+            elif escolha == 2: # login
                 login() 
             elif escolha == 0: # Sair
                 sair() # Chama a função sair
             else:
                 print("Opção inválida. Tente novamente.") # Mensagem de erro para opção inválida
+
+# funcao que exibe o menu de login/cadastro
 def exibir_menu_login_ou_cadastro():
     """
     Função para exibir o menu de opções e retornar a escolha do usuário.
@@ -78,8 +72,15 @@ def exibir_menu_login_ou_cadastro():
     escolha = int(input("Escolha uma opção: ")) # Lê a opção escolhida pelo usuário, sem validar
     return escolha # Retorna a opção escolhida
 
+# funcao ainda nao concluida
+def adm():
+    a = 0
 
+# funcao caso o usuario seja comum
+def usuario():
+    escolha_login_ou_cadastro()
 
+# funcao de cadastro
 def cadastro():
     """
     Função para adicionar um novo usuario 
@@ -102,28 +103,24 @@ def login():
     Se não for encontrado, imprime uma mensagem de erro.
     :return: None
     """
-    print("Login:")
-    user_procurar = input("Digite o seu nome de usuário: ")
-    senha_procurar = input("Digite sua senha: ")
-    # Abre o arquivo contatos.txt para leitura, lê todo o conteúdo e fecha o arquivo
-    with open("./arq_txt/users.txt", "r") as arquivo_users:
-        users = arquivo_users.readlines() # Lê todas as linhas do arquivo e armazena em uma lista
-        
-    # Procura o user no arquivo
-    for linha in users: # Para cada linha no conteúdo do arquivo
-        user, senha = linha.strip().split(",") # Divide a linha em partes, separando por vírgula
-        # Verifica se o nome procurado é igual ao nome do user, ignorando maiúsculas e minúsculas
-        if user_procurar.lower() == user.lower(): 
-            if senha_procurar == senha:
-                print("Login realizado com sucesso")
-                break # Sai do loop se o usuario e a senha forem corretos
-    else: # Se não encontrar o usuario
-        print("Usuário não encontrado.") 
-
-
-
-
-
-
-
+    while True:
+        print("Login:")
+        user_procurar = input("Digite o seu nome de usuário: ")
+        senha_procurar = input("Digite sua senha: ")
+        # Abre o arquivo contatos.txt para leitura, lê todo o conteúdo e fecha o arquivo
+        with open("./arq_txt/users.txt", "r") as arquivo_users:
+            users = arquivo_users.readlines() # Lê todas as linhas do arquivo e armazena em uma lista
+            
+        # Procura o user no arquivo
+        for linha in users: # Para cada linha no conteúdo do arquivo
+            user,senha = linha.strip().split(",") # Divide a linha em partes, separando por virgula
+            # Verifica se o nome procurado é igual ao nome do user, ignorando maiusculas e minusculas
+            if user_procurar.lower() == user.lower(): 
+                if senha_procurar == senha: # verifica se a senha que o usuario inseriu esta correta
+                    print("Login realizado com sucesso")
+                    break # Sai do loop se o usuario e a senha forem corretos
+                else:
+                    print("senha incorreta")
+        else: # Se não encontrar o usuario
+            print("Usuário não encontrado.") 
    
