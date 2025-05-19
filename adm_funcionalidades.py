@@ -30,20 +30,20 @@ def main_adm():
     while True: # Loop infinito
         escolha = exibir_menu_adm() # Chama a função exibir_menu e armazena a escolha do usuário
         if escolha == 1: 
-            add_musicas() # Chama a função 
+            add_musica() # Chama a função 
         elif escolha == 2: 
-            consultar_users() # Chama a função 
+            consultar_user() # Chama a função 
         elif escolha == 3: 
-            excluir_musicas() # Chama a função 
+            excluir_musica() # Chama a função 
         elif escolha == 4: 
-            cadastrar_artistas() # Chama a função 
+            cadastrar_artista() # Chama a função 
         elif escolha == 0: # Sair
             sair() # Chama a função sair
         else:
             print("Opção inválida. Tente novamente.") # Mensagem de erro para opção inválida
 
 
-def add_musicas():
+def add_musica():
     """
     Função para adicionar uma nova musica 
     """
@@ -59,3 +59,37 @@ def add_musicas():
     # Fecha o arquivo
     arquivo_musicas.close()
     print("Musica adicionada com sucesso!") # Mensagem de sucesso
+
+
+def excluir_musica():
+    """
+    Apaga uma musica do arquivos musicas.txt
+    :return: None
+    """
+    nome_apagar = input("Digite o nome da musica que deseja apagar: ")
+    # Abre o arquivo musicas.txt para leitura
+    arquivo_musicas = open("./arq_txt/musicas.txt", "r")
+    # Lê o conteúdo do arquivo
+    conteudo = arquivo_musicas.readlines()
+    # Fecha o arquivo
+    arquivo_musicas.close()
+    # Procura a musica no arquivo
+    for i, linha in enumerate(conteudo):
+        nome,artista,duracao,genero,curtidas = linha.strip().split(",")
+        if nome_apagar.lower() == nome.lower():
+            # .strip() -> remove espacos no inicio e fim da string
+            print(f"Musica encontrada: {linha.strip()}")
+            # Remove a musica da lista da variavel conteudo
+            conteudo.pop(i)
+            break
+    else: # Se não encontrar a musica
+        print("Musica não encontrada.")
+        
+    # Abre o arquivo musicas.txt para escrita
+    arquivo_musicas = open("./arq_txt/musicas.txt", "w")
+    # Grava as musicas restantes no arquivo
+    for linha in conteudo: # Para cada linha no conteudo do arquivo
+        arquivo_musicas.write(linha) # Grava a linha no arquivo musicas.txt
+    # Fecha o arquivo
+    arquivo_musicas.close()
+    print("Musica apagada com sucesso!") # Mensagem de sucesso
