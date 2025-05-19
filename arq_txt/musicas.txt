@@ -1,1 +1,6 @@
+// nome,artista,duracao,estilo,curtidas
 
+
+who_shot_ya,big,4,rap,100
+hail_mary,tupac,4.10,rap,95
+skys_the_limit,big,3.30,rap,40
