@@ -1,3 +1,5 @@
+from cadastro_login import sair()
+
 # arquivo com as funcionalidades dos adms
 
 menu = {
