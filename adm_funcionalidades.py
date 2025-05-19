@@ -60,6 +60,11 @@ def add_musica():
     arquivo_musicas.close()
     print("Musica adicionada com sucesso!") # Mensagem de sucesso
 
+def consultar_user():
+    print("Consultar usuario")
+    user_name = input("Digite o username do usuario")
+    # abre o arquivo de usuarios para leitura
+    arquivo_users = open("./arq_txt/users.txt", "r")
 
 def excluir_musica():
     """
@@ -93,3 +98,19 @@ def excluir_musica():
     # Fecha o arquivo
     arquivo_musicas.close()
     print("Musica apagada com sucesso!") # Mensagem de sucesso
+
+
+def add_artista():
+    """
+    Função para cadastrar um artista
+    """
+    print("Cadastrar artista:")
+    artista_nome = input("Digite o nome do artista: ")
+    # Abre o arquivo artistas para escrita. Modo "a" para adicionar ao final do arquivo
+    arquivo_artistas = open("./arq_txt/artistas.txt", "a")
+    # Grava a musica no arquivo
+    arquivo_artistas.write(f"{artista_nome}") # Grava o artista no arquivo
+    # Fecha o arquivo
+    arquivo_artistas.close()
+    print("Artista cadastrado com sucesso!") # Mensagem de sucesso
+
