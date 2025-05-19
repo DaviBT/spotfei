@@ -1,5 +1,6 @@
 # imports de funcoes exteriores
 from adm_funcionalidades import *
+from user_funcionalidades import *
 
 ###################
 
@@ -79,15 +80,15 @@ def exibir_menu_login_ou_cadastro():
 
 # funcao ainda nao concluida
 def adm():
-     """
-    Função para o adm logar em sua conta
-    """
-    print("Login como administrador:")
-    adm_procurar = input("Digite usename: ")
-    senha_procurar = input("Digite a senha: ")
-     # Abre o arquivo adms.txt para leitura, lê todo o conteúdo e fecha o arquivo
-        with open("./arq_txt/adms.txt", "r") as arquivo_adms:
-            adms = arquivo_adms.readlines() # Lê todas as linhas do arquivo e armazena na lista adm
+        """
+        Função para o adm logar em sua conta
+        """
+        print("Login como administrador:")
+        adm_procurar = input("Digite seu username de administrador: ")
+        senha_procurar = input("Digite a senha: ")
+        # Abre o arquivo adms.txt para leitura, lê todo o conteúdo e fecha o arquivo
+        arquivo_adms = open("./arq_txt/adms.txt", "r")
+        adms = arquivo_adms.readlines() # Lê todas as linhas do arquivo e armazena na lista adm
             
         # Procura o adm no arquivo
         for linha in adms: # Para cada linha no conteúdo do arquivo
@@ -148,7 +149,7 @@ def login():
             if user_procurar.lower() == user.lower(): 
                 if senha_procurar == senha: # verifica se a senha que o usuario inseriu esta correta
                     print("Login realizado com sucesso")
-                    break # Sai do loop se o usuario e a senha forem corretos
+                    main_usuario() # Sai do loop se o usuario e a senha forem corretos
                 else:
                     print("senha incorreta")
         else: # Se não encontrar o usuario

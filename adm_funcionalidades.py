@@ -1,5 +1,5 @@
 # funcoes importadas
-from cadastro_login import sair()
+from cadastro_login import *
 
 # arquivo com as funcionalidades dos adms
 
@@ -12,7 +12,7 @@ menu = {
 }
 
 def exibir_menu_adm():
-  """
+    """
     Função para exibir o menu de opções e retornar a escolha do adm.
     :return: Opção escolhida pelo adm.
     """
@@ -68,7 +68,7 @@ def consultar_user():
 
 def excluir_musica():
     """
-    Apaga uma musica do arquivos musicas.txt
+    Apaga uma musica do arquivo musicas.txt
     :return: None
     """
     nome_apagar = input("Digite o nome da musica que deseja apagar: ")
@@ -80,10 +80,10 @@ def excluir_musica():
     arquivo_musicas.close()
     # Procura a musica no arquivo
     for i, linha in enumerate(conteudo):
-        nome,artista,duracao,genero,curtidas = linha.strip().split(",")
+        nome = linha.strip().split(",")
         if nome_apagar.lower() == nome.lower():
             # .strip() -> remove espacos no inicio e fim da string
-            print(f"Musica encontrada: {linha.strip()}")
+            print(f"Musica deletada: {linha.strip()}")
             # Remove a musica da lista da variavel conteudo
             conteudo.pop(i)
             break
@@ -114,3 +114,5 @@ def add_artista():
     arquivo_artistas.close()
     print("Artista cadastrado com sucesso!") # Mensagem de sucesso
 
+def cadastrar_artista():
+    a = 0
