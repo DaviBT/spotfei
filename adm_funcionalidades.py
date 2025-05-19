@@ -40,3 +40,21 @@ def main_adm():
             sair() # Chama a função sair
         else:
             print("Opção inválida. Tente novamente.") # Mensagem de erro para opção inválida
+
+
+def add_musicas():
+    """
+    Função para adicionar uma nova musica 
+    """
+    print("Nova musica:")
+    musica_nome = input("Digite o nome da musica: ")
+    musica_artista = input("Digite o artista da musica: ")
+    musica_duracao = input("Digite a duracao da musica: ")
+    musica_genero = input("Digite o genero da musica: ")
+    # Abre o arquivo musicas para escrita. Modo "a" para adicionar ao final do arquivo
+    arquivo_musicas = open("./arq_txt/musicas.txt", "a")
+    # Grava a musica no arquivo
+    arquivo_musicas.write(f"{musica_nome},{musica_artista},{musica_duracao},{musica_genero},0") # Grava a musica no arquivo, separando os dados por virgula
+    # Fecha o arquivo
+    arquivo_musicas.close()
+    print("Musica adicionada com sucesso!") # Mensagem de sucesso
