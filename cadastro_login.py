@@ -74,7 +74,28 @@ def exibir_menu_login_ou_cadastro():
 
 # funcao ainda nao concluida
 def adm():
-    a = 0
+     """
+    Função para o adm logar em sua conta
+    """
+    print("Login como administrador:")
+    adm_procurar = input("Digite usename: ")
+    senha_procurar = input("Digite a senha: ")
+     # Abre o arquivo adms.txt para leitura, lê todo o conteúdo e fecha o arquivo
+        with open("./arq_txt/adms.txt", "r") as arquivo_adms:
+            adms = arquivo_adms.readlines() # Lê todas as linhas do arquivo e armazena na lista adm
+            
+        # Procura o adm no arquivo
+        for linha in adms: # Para cada linha no conteúdo do arquivo
+            adm,senha = linha.strip().split(",") # Divide a linha em partes, separando por virgula
+            # Verifica se o username procurado é igual ao do adm, ignorando maiusculas e minusculas
+            if adm_procurar.lower() == adm.lower(): 
+                if senha_procurar == senha: # verifica se a senha inserida esta correta
+                    print("Login como adm realizado com sucesso")
+                    break # Sai do loop se o adm e a senha forem corretos
+                else:
+                    print("senha incorreta")
+        else: # Se não encontrar o adm
+            print("Usuário não encontrado.") 
 
 # funcao caso o usuario seja comum
 def usuario():
