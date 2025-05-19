@@ -99,7 +99,7 @@ def adm():
                     """
                     chama a funcao de exibicao do menu, a funcao vem do arquivo adm_funcionalidades
                     """
-                    exibir_menu_adm() 
+                    main_adm() 
                     break # Sai do loop se o adm e a senha forem corretos
                 else:
                     print("senha incorreta")
