@@ -1,3 +1,8 @@
+# imports de funcoes exteriores
+from adm_funcionalidades import *
+
+###################
+
 menu = {
     1: "administrador",
     2: "usuário comum"
@@ -91,6 +96,10 @@ def adm():
             if adm_procurar.lower() == adm.lower(): 
                 if senha_procurar == senha: # verifica se a senha inserida esta correta
                     print("Login como adm realizado com sucesso")
+                    """
+                    chama a funcao de exibicao do menu, a funcao vem do arquivo adm_funcionalidades
+                    """
+                    exibir_menu_adm() 
                     break # Sai do loop se o adm e a senha forem corretos
                 else:
                     print("senha incorreta")
