@@ -106,16 +106,16 @@ def add_artista():
     """
     print("Cadastrar artista:")
     artista_inserido = input("Digite o nome do artista: ")
-    # Abre o arquivo artistas para escrita. Modo "a" para adicionar ao final do arquivo
+
+    # Lê os artistas já cadastrados
     with open("./arq_txt/artistas.txt", "r") as arquivo_artistas:
-        artistas = arquivo_artistas.readlines() # armazena os artistas em um arquivo
-           
-    for artista in artistas:
-        if artista == artista_inserido:
-            print("O artista ja existe no arquivo")
-        else:
-            arquivo_artistas.write(f"{artista_inserido}\n") # Grava o artista no arquivo
-            # Fecha o arquivo
-            arquivo_artistas.close()
-            print("Artista cadastrado com sucesso!") # Mensagem de sucesso
-    
+        artistas = arquivo_artistas.readlines()
+
+    # Verifica se já existe (ignorando maiúsculas/minúsculas e espaços)
+    if any(artista.strip().lower() == artista_inserido.lower() for artista in artistas):
+        print("O artista já existe no arquivo.")
+    else:
+        # Se não existir, adiciona
+        with open("./arq_txt/artistas.txt", "a") as artistas_editar:
+            artistas_editar.write(f"{artista_inserido}\n")
+        print("Artista cadastrado com sucesso!")
