@@ -4,6 +4,8 @@ from user_funcionalidades import *
 
 ###################
 
+user = ""
+
 menu = {
     1: "administrador",
     2: "usuário comum"
@@ -120,11 +122,10 @@ def cadastro():
     username = input("Digite o nome de usuário: ")
     senha = input("Digite a senha: ")
     # Abre o arquivo usuarios para escrita. Modo "a" para adicionar ao final do arquivo
-    arquivo_users = open("./arq_txt/users.txt", "a")
-    # Grava o user no arquivo
-    arquivo_users.write(f"{username},{senha}") # Grava o user no arquivo, separando os dados por vírgula
-    # Fecha o arquivo
-    arquivo_users.close()
+    with open("./arq_txt/users.txt", "a") as arquivo_users:
+        # Grava o user no arquivo, separando os dados por vírgula e adicionando nova linha
+        arquivo_users.write(f"{username},{senha}\n")
+        # Fecha o arquivo pois e um 'with', mesmo que ocorra um erro
     print("Usuário cadastrado com sucesso!") # Mensagem de sucesso
 
 def login():
@@ -144,6 +145,7 @@ def login():
             
         # Procura o user no arquivo
         for linha in users: # Para cada linha no conteúdo do arquivo
+            global user
             user,senha = linha.strip().split(",") # Divide a linha em partes, separando por virgula
             # Verifica se o nome procurado é igual ao nome do user, ignorando maiusculas e minusculas
             if user_procurar.lower() == user.lower(): 
@@ -154,4 +156,3 @@ def login():
                     print("senha incorreta")
         else: # Se não encontrar o usuario
             print("Usuário não encontrado.") 
-   

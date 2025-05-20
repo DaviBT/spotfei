@@ -1,3 +1,5 @@
+from cadastro_login import user 
+
 menu = {
     1: "Buscar musicas",
     2: "Gerenciar playlist",
@@ -51,45 +53,85 @@ def gerenciar_playlist():
     """
     print("Gerenciar playlist:")
     # Aqui você pode implementar a lógica para gerenciar a playlist
-    with open("playlists.txt", "r") as arquivo_playlists: 
-        playlists = arquivo_playlists.readlines()
     
-    print("Playlists disponíveis:")
-    for nome in playlists:
-        print(f"- {nome}")
+    menu_playlist = {
+        1: "Criar playlist",
+        2: "Visualizar playlist",
+        0: "Sair"
+    }
+    
+    exibir_menu_usuario()
+    
+    while True: # Loop infinito
+        escolha = exibir_menu_usuario() # Chama a função exibir_menu e armazena a escolha do usuário
+        if escolha == 1: 
+            criar_playlist() 
+        elif escolha == 2: 
+            visualizar_playlist() 
+        elif escolha == 0: # Sair
+            sair() # Chama a função sair
+        else:
+            print("Opção inválida. Tente novamente.")
+            break
+            
+    def criar_playlist():
+        nome_playlist = input(f"Digite o nome da nova playlist: {user}_") # pede o nome primeiro
+        with open(f"./playlists/{nome_playlist}.txt", "w") as arquivo_playlists:
+                arquivo_playlists.write(f"{nome_playlist}\n")
+                print(f"Playlist '{nome_playlist}' criada com sucesso!")
+            
+    def visualizar_playlist():
+        print("Suas playlists:")
+        with open("playlists.txt", "r") as arquivo_playlists: 
+                nick_playlists = arquivo_playlists.readlines()
 
-    nome_playlist = input("Digite o nome da playlist que deseja gerenciar: ").strip()
-    if nome_playlist not in playlists:
-        print("Playlist não encontrada. Tente novamente.")
-        return
-    
+        edit_playlist = input("Digite o nome da playlist que deseja gerenciar: ").strip()
+        if edit_playlist in nick_playlists:
+            print(f"Playlist '{edit_playlist}' encontrada!")
+            # Aqui você pode adicionar a lógica para visualizar as musicas da playlist
+            edit_playlist = {
+                1: "Adicionar musica",
+                2: "Remover musica",
+                0: "Sair"
+            }    
    
-    
-    # Exemplo: adicionar ou remover musicas da playlist
-    acao = input("Digite 'adicionar' para adicionar uma musica ou 'remover' para remover uma musica: ")
-    if acao == "adicionar":
-        nome_musica = input("Digite o nome da musica que deseja adicionar: ")
-        print(f"Adicionando a musica: {nome_musica} à sua playlist")
-        add_musicas_playlist = open("musicas_playlist.txt", "a")
-        add_musicas_playlist.write(f"{nome_musica}\n")
-        add_musicas_playlist.close()
-        print("Música adicionada com sucesso!")
-         
-    elif acao == "remover":
-        nome_musica = input("Digite o nome da musica que deseja remover: ")
-        remove_musicas_playlist = open("musicas_playlist.txt", "r")
-        musicas = remove_musicas_playlist.readlines()
-        remove_musicas_playlist.close()
-        # Remove a música desejada
-        musicas = [musica for musica in musicas if musica.strip() != nome_musica]
-        # Salva novamente a lista sem a música removida
-        salva_playlist = open("musicas_playlist.txt", "w")
-        salva_playlist.writelines(musicas)
-        salva_playlist.close()
-        print(f"Música '{nome_musica}' removida da sua playlist.")
+            while True: # Loop infinito
+                escolha = exibir_menu_usuario() # Chama a função exibir_menu e armazena a escolha do usuário
+                if escolha == 1: 
+                    adicionar_musica()
+                elif escolha == 2: 
+                    remover_musica()
+                elif escolha == 0: # Sair
+                    sair()
+        else:
+            print("Opção inválida. Tente novamente.")
         
-    else:
-        print("Ação inválida. Tente novamente.")
+        exibir_menu_usuario()
+            
+        def adicionar_musica():
+                nome_musica = input("Digite o nome da musica que deseja adicionar: ")
+                print(f"Adicionando a musica: {nome_musica} à sua playlist")
+                add_musicas_playlist = open("musicas_playlist.txt", "a")
+                add_musicas_playlist.write(f"{nome_musica}\n")
+                add_musicas_playlist.close()
+                print("Música adicionada com sucesso!")
+         
+        def remover_musica():
+            nome_musica = input("Digite o nome da musica que deseja remover: ")
+            remove_musicas_playlist = open("musicas_playlist.txt", "r")
+            musicas = remove_musicas_playlist.readlines()
+            remove_musicas_playlist.close()
+            # Verifica se a música existe na playlist
+            if any(musica.strip() == nome_musica for musica in musicas):
+                # Remove a música desejada
+                musicas = [musica for musica in musicas if musica.strip() != nome_musica]
+                # Salva novamente a lista sem a música removida
+                salva_playlist = open("musicas_playlist.txt", "w")
+                salva_playlist.writelines(musicas)
+                salva_playlist.close()
+                print(f"Música '{nome_musica}' removida da sua playlist.")
+            else:
+                print(f"A música '{nome_musica}' não está na sua playlist.")
         
 def visualizar_historico():
     """
