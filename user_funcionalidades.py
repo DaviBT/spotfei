@@ -51,6 +51,20 @@ def gerenciar_playlist():
     """
     print("Gerenciar playlist:")
     # Aqui você pode implementar a lógica para gerenciar a playlist
+    with open("playlists.txt", "r") as arquivo_playlists: 
+        playlists = arquivo_playlists.readlines()
+    
+    print("Playlists disponíveis:")
+    for nome in playlists:
+        print(f"- {nome}")
+
+    nome_playlist = input("Digite o nome da playlist que deseja gerenciar: ").strip()
+    if nome_playlist not in playlists:
+        print("Playlist não encontrada. Tente novamente.")
+        return
+    
+   
+    
     # Exemplo: adicionar ou remover musicas da playlist
     acao = input("Digite 'adicionar' para adicionar uma musica ou 'remover' para remover uma musica: ")
     if acao == "adicionar":
