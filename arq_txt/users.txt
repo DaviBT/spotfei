@@ -1,6 +1,1 @@
-<<<<<<< HEAD
-teste,testemurillex,C:/Users/muril/AppData/Local/Programs/Python/Python313/python.exe "c:/Users/muril/OneDrive/Documentos/One Drive new account/OneDrive/Área de Trabalho/spotfei/spotfei-1/spotfei.py"murillex ,123
-=======
-murilo,123
-davi,123
->>>>>>> e6dd52c8fbe213c55f11de3c4eef452811af6827
+
