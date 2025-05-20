@@ -81,7 +81,7 @@ def excluir_musica():
     # Procura a musica no arquivo
     for i, linha in enumerate(conteudo):
         nome = linha.strip().split(",")
-        if nome_apagar.lower() == nome.lower():
+        if nome_apagar.lower() == nome[0].lower():
             # .strip() -> remove espacos no inicio e fim da string
             print(f"Musica deletada: {linha.strip()}")
             # Remove a musica da lista da variavel conteudo

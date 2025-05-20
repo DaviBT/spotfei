@@ -3,5 +3,4 @@
 
 who shot ya,big,4,rap,100
 hail mary,tupac,4.10,rap,95
-skys the limit,big,3.30,rap,40
 shape of you,ed sheran,2,pop,0

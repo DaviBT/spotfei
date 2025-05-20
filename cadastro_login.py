@@ -120,11 +120,10 @@ def cadastro():
     username = input("Digite o nome de usuário: ")
     senha = input("Digite a senha: ")
     # Abre o arquivo usuarios para escrita. Modo "a" para adicionar ao final do arquivo
-    arquivo_users = open("./arq_txt/users.txt", "a")
-    # Grava o user no arquivo
-    arquivo_users.write(f"{username},{senha}") # Grava o user no arquivo, separando os dados por vírgula
-    # Fecha o arquivo
-    arquivo_users.close()
+    with open("./arq_txt/users.txt", "a") as arquivo_users:
+        # Grava o user no arquivo, separando os dados por vírgula e adicionando nova linha
+        arquivo_users.write(f"{username},{senha}\n")
+        # Fecha o arquivo pois e um 'with', mesmo que ocorra um erro
     print("Usuário cadastrado com sucesso!") # Mensagem de sucesso
 
 def login():
