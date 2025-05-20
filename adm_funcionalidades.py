@@ -36,7 +36,7 @@ def main_adm():
         elif escolha == 3: 
             excluir_musica() # Chama a função 
         elif escolha == 4: 
-            cadastrar_artista() # Chama a função 
+            add_artista() # Chama a função 
         elif escolha == 0: # Sair
             sair() # Chama a função sair
         else:
@@ -105,14 +105,17 @@ def add_artista():
     Função para cadastrar um artista
     """
     print("Cadastrar artista:")
-    artista_nome = input("Digite o nome do artista: ")
+    artista_inserido = input("Digite o nome do artista: ")
     # Abre o arquivo artistas para escrita. Modo "a" para adicionar ao final do arquivo
-    arquivo_artistas = open("./arq_txt/artistas.txt", "a")
-    # Grava a musica no arquivo
-    arquivo_artistas.write(f"{artista_nome}") # Grava o artista no arquivo
-    # Fecha o arquivo
-    arquivo_artistas.close()
-    print("Artista cadastrado com sucesso!") # Mensagem de sucesso
-
-def cadastrar_artista():
-    a = 0
+    with open("./arq_txt/artistas.txt", "r") as arquivo_artistas:
+        artistas = arquivo_artistas.readlines() # armazena os artistas em um arquivo
+           
+    for artista in artistas:
+        if artista == artista_inserido:
+            print("O artista ja existe no arquivo")
+        else:
+            arquivo_artistas.write(f"{artista_inserido}\n") # Grava o artista no arquivo
+            # Fecha o arquivo
+            arquivo_artistas.close()
+            print("Artista cadastrado com sucesso!") # Mensagem de sucesso
+    

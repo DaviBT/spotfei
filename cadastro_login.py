@@ -4,6 +4,8 @@ from user_funcionalidades import *
 
 ###################
 
+user = ""
+
 menu = {
     1: "administrador",
     2: "usuário comum"
@@ -143,6 +145,7 @@ def login():
             
         # Procura o user no arquivo
         for linha in users: # Para cada linha no conteúdo do arquivo
+            global user
             user,senha = linha.strip().split(",") # Divide a linha em partes, separando por virgula
             # Verifica se o nome procurado é igual ao nome do user, ignorando maiusculas e minusculas
             if user_procurar.lower() == user.lower(): 
@@ -153,4 +156,3 @@ def login():
                     print("senha incorreta")
         else: # Se não encontrar o usuario
             print("Usuário não encontrado.") 
-   
