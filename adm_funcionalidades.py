@@ -65,6 +65,26 @@ def consultar_user():
     user_name = input("Digite o username do usuario")
     # abre o arquivo de usuarios para leitura
     arquivo_users = open("./arq_txt/users.txt", "r")
+    # Lê o conteúdo do arquivo
+    conteudo = arquivo_users.readlines()
+    # Fecha o arquivo
+    arquivo_users.close()
+    # Procura o user no arquivo
+    for i, linha in enumerate(conteudo):
+        user_name = linha.strip().split(",")
+        if user_name.lower() == nome[0].lower():
+            print(f"Informacoes do usuario {user_name}: ")
+            print("playlists: ")
+            
+            print("-----------------")
+            
+            print("musicas curtidas: ")
+            
+            print("-----------------")
+            
+            print("musicas descurtidas: ")
+
+            print("-----------------")
 
 def excluir_musica():
     """
