@@ -1,4 +1,4 @@
-// nome,artista,duracao,genero,curtidas
+// nome,artista,duracao,genero,num curtidas,num descurtidas
 
 billie jean,michael jackson,3.09,pop,0
 who shot ya,notorious big,4,rap,0
