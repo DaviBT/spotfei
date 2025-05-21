@@ -168,7 +168,7 @@ def ver_estatisticas():
     
     print("Quantidade de usuarios: ")
     # abre o arquivo no modo de leitura
-    arq_musicas = open("./musicas", "r")
+    arq_musicas = open("./arq_txt/users", "r")
     # cria uma lista com as musicas do arquivo
     musicas = arq_musicas.readlines()
     for indice, conteudo in musicas:
