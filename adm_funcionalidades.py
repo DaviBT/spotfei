@@ -85,6 +85,10 @@ def consultar_user():
             print("musicas descurtidas: ")
 
             print("-----------------")
+        else:
+            print("usuario nao encontrado")
+            exibir_menu_adm() # volta para o menu em caso de erro
+            
 
 def excluir_musica():
     """
@@ -134,6 +138,7 @@ def add_artista():
     # Verifica se já existe (ignorando maiúsculas/minúsculas e espaços)
     if any(artista.strip().lower() == artista_inserido.lower() for artista in artistas):
         print("O artista já existe no arquivo.")
+        exibir_menu_adm() # volta para o menu em caso de erro
     else:
         # Se não existir, adiciona
         with open("./arq_txt/artistas.txt", "a") as artistas_editar:
