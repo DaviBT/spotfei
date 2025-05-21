@@ -9,6 +9,7 @@ menu = {
     2: "consultar usuarios", 
     3: "excluir musicas",
     4: "cadastrar artistas",
+    5: "ver estatisticas",
 }
 
 def exibir_menu_adm():
@@ -37,6 +38,8 @@ def main_adm():
             excluir_musica() # Chama a função 
         elif escolha == 4: 
             add_artista() # Chama a função 
+        elif escolha == 5: 
+            ver_estatisticas() # Chama a função 
         elif escolha == 0: # Sair
             sair() # Chama a função sair
         else:
@@ -144,3 +147,29 @@ def add_artista():
         with open("./arq_txt/artistas.txt", "a") as artistas_editar:
             artistas_editar.write(f"{artista_inserido}\n")
         print("Artista cadastrado com sucesso!")
+
+def ver_estatisticas():
+    print("")
+    print("Estatisticas do sistema: ")
+    print("")
+    
+    print("Top 5 musicas com mais curtidas: ")
+    
+    print("")
+    print("-------------")
+    print("")
+    
+    print("Top 5 musicas mais descurtidas: ")
+
+    
+    print("")
+    print("-------------")
+    print("")
+    
+    print("Quantidade de usuarios: ")
+
+    print("")
+    print("-------------")
+    print("")
+    
+    print("Quantidade de musicas: ")
