@@ -172,7 +172,7 @@ def ver_estatisticas():
     # cria uma lista com as musicas do arquivo
     musicas = arq_musicas.readlines()
     for indice, conteudo in musicas:
-
+        a = 0
     print(indice)
     
         
