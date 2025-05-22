@@ -49,9 +49,9 @@ def buscar_musicas():
     # Procura o contato no arquivo
     for linha in conteudo: # Para cada linha no conteúdo do arquivo
         musica_nome, musica_artista, musica_duracao, musica_genero, curtidas, descurtidas = linha.strip().split(",") # Divide a linha em partes, separando por vírgula
-        if nome_musica.lower() == musica_nome.lower(): # Verifica se o nome procurado é igual ao nome do contato, ignorando maiúsculas e minúsculas
-            print(f"Nome: {musica_nome}, Artista: {musica_artista}, Duração: {musica_duracao}, Gênero: {musica_genero}, Curtidas: {curtidas}, Descurtidas: {descurtidas}") # Exibe os dados do contato encontrado
-            break # Sai do loop se o contato for encontrado
+        if nome_musica.lower() == musica_nome.lower(): # Verifica se o nome procurado é igual ao nome do da musica, ignorando maiúsculas e minúsculas
+            print(f"Nome: {musica_nome}, Artista: {musica_artista}, Duração: {musica_duracao}, Gênero: {musica_genero}, Curtidas: {curtidas}, Descurtidas: {descurtidas}") # Exibe os dados da musica
+            break # Sai do loop 
     else: # Se não encontrar o contato
         print("Música não encontrada.") # Mensagem de erro se o contato não for encontrado
     
