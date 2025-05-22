@@ -151,8 +151,9 @@ def login():
             if user_procurar.lower() == user.lower(): 
                 if senha_procurar == senha: # verifica se a senha que o usuario inseriu esta correta
                     print("Login realizado com sucesso")
-                    main_usuario() # Sai do loop se o usuario e a senha forem corretos
+                    main_usuario(user) # Sai do loop se o usuario e a senha forem corretos
                 else:
                     print("senha incorreta")
         else: # Se não encontrar o usuario
             print("Usuário não encontrado.") 
+            
