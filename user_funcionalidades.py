@@ -34,14 +34,56 @@ def main_usuario(user):
         elif escolha == 0: # Sair
             sair() # Chama a função sair
         else:
-            print("Opção inválida. Tente novamente.") # Mensagem de erro para opção inválida
+            print("Opção inválida. Tente novamente.")
+            main_usuario()
+            # Mensagem de erro para opção inválida
             
 def buscar_musicas():
     """
     Função para buscar musicas.
     """
+
+    # menu das possibilidades do usuario ao buscar uma musica
+    menu_musica = {
+        1: "Curtir musica",
+        2: "Descurtir musica",
+        3: "Adicionar a uma playlist nova",
+        4: "Adicionar a uma playlist",
+        0: "Sair"
+    }
+    # funcao que pode mostrar o menu ao user
+    def exibir_menu_musica():
+        """
+        :return: Opção escolhida pelo usuário.
+        """
+        print("Menu:")
+        for opcao, descricao in menu_musica.items():
+            print(f"{opcao} - {descricao}")
+        escolha = int(input("Escolha uma opção: ")) # Lê a opção escolhida pelo usuário, sem validar
+        return escolha # Retorna a opção escolhida
+    def main_musica():
+        """
+        Função principal que exibe o menu e chama as funções correspondentes
+        de acordo com a escolha do usuário.
+        """
+        while True: # Loop infinito
+            escolha = exibir_menu_musica() 
+            if escolha == 1: 
+                curtir_musica() 
+            elif escolha == 2: 
+                descurtir_musica() 
+            elif escolha == 3: 
+                criar_playlist() 
+            elif escolha == 4: 
+                adicionar_na_playlist() 
+            elif escolha == 0: # Sair
+                sair() # Chama a função sair
+            else:
+                print("Opção inválida. Tente novamente.") # Mensagem de erro para opção inválida
+
     print("Buscar musicas:")
-    nome_musica = input("Digite o nome da musica: ")
+    nome_musica = input("Digite o nome da musica: ")   
+
     
     with open("./arq_txt/musicas.txt", "r") as arquivo_musicas: # Abre o arquivo musicas.txt para leitura
         conteudo = arquivo_musicas.readlines() # Lê todas as linhas do arquivo e armazena em uma lista
@@ -51,10 +93,13 @@ def buscar_musicas():
         musica_nome, musica_artista, musica_duracao, musica_genero, curtidas, descurtidas = linha.strip().split(",") # Divide a linha em partes, separando por vírgula
         if nome_musica.lower() == musica_nome.lower(): # Verifica se o nome procurado é igual ao nome do da musica, ignorando maiúsculas e minúsculas
             print(f"Nome: {musica_nome}, Artista: {musica_artista}, Duração: {musica_duracao}, Gênero: {musica_genero}, Curtidas: {curtidas}, Descurtidas: {descurtidas}") # Exibe os dados da musica
+
+            # mostra o menu da musica para o user, onde ele pode curtir, descurtir...
+            print(main_musica())
             break # Sai do loop 
-    else: # Se não encontrar o contato
+    else: # Se não encontrar a musica
         print("Música não encontrada.") # Mensagem de erro se a musica não for encontrada
-        
+
 import os
 
 def exibir_menu_playlist():
@@ -71,6 +116,7 @@ def exibir_menu_playlist():
 
 def criar_playlist(user):
     nome_playlist = input(f"Digite o nome da nova playlist: {user}_")
+    nome_playlist = "playlist_"+user+"_"+nome_playlist
     caminho_playlist = f"./arq_txt/{nome_playlist}.txt"
     with open(caminho_playlist, "w") as arquivo_playlists:
         arquivo_playlists.write(f"{nome_playlist}\n")
