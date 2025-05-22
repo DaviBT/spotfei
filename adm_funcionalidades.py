@@ -58,7 +58,7 @@ def add_musica():
     # Abre o arquivo musicas para escrita. Modo "a" para adicionar ao final do arquivo
     arquivo_musicas = open("./arq_txt/musicas.txt", "a")
     # Grava a musica no arquivo
-    arquivo_musicas.write(f"{musica_nome},{musica_artista},{musica_duracao},{musica_genero},0\n") # Grava a musica no arquivo, separando os dados por virgula
+    arquivo_musicas.write(f"{musica_nome},{musica_artista},{musica_duracao},{musica_genero},0,0\n") # Grava a musica no arquivo, separando os dados por virgula
     # Fecha o arquivo
     arquivo_musicas.close()
     print("Musica adicionada com sucesso!") # Mensagem de sucesso
