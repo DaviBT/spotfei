@@ -65,7 +65,7 @@ def add_musica():
 
 def consultar_user():
     print("Consultar usuario")
-    user_name = input("Digite o username do usuario")
+    user_name = input("Digite o username do usuario: ")
     # abre o arquivo de usuarios para leitura
     arquivo_users = open("./arq_txt/users.txt", "r")
     # Lê o conteúdo do arquivo
