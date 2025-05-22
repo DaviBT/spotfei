@@ -53,9 +53,8 @@ def buscar_musicas():
             print(f"Nome: {musica_nome}, Artista: {musica_artista}, Duração: {musica_duracao}, Gênero: {musica_genero}, Curtidas: {curtidas}, Descurtidas: {descurtidas}") # Exibe os dados da musica
             break # Sai do loop 
     else: # Se não encontrar o contato
-        print("Música não encontrada.") # Mensagem de erro se o contato não for encontrado
-    
-        ########################################## vamo ve
+        print("Música não encontrada.") # Mensagem de erro se a musica não for encontrada
+        
 import os
 
 def exibir_menu_playlist():
