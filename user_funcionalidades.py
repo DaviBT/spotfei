@@ -168,13 +168,23 @@ def remover_musica(nome_playlist):
 
 def visualizar_playlist(user):
     print("Suas playlists:")
-    playlists = [f for f in os.listdir("./arq_txt") if f.startswith(user+"_") and f.endswith(".txt")]
-    if not playlists:
-        print("Nenhuma playlist encontrada.")
+    playlists = f"./arq_txt/playlists/playlists_{user}.txt"
+    # [f for f in os.listdir("./arq_txt/playlists/") if f.startswith("playlists"+"_"+user) and f.endswith(".txt")]
+
+
+
+
+    try:
+        with open(playlists, "r") as arquivo:
+            linhas = arquivo.readlines()
+        print(f"Músicas da playlist '{playlists}':")
+        for musica in linhas:
+            print(musica.replace(".txt", ""))
+    except FileNotFoundError:
+        print("Playlist não encontrada.")
         return
-    for pl in playlists:
-        print(pl.replace(".txt", ""))
-    nome = input("Digite o nome da playlist que deseja gerenciar: ").strip()
+    nomeInput = input("Digite o nome da playlist que deseja gerenciar: ").strip()
+    nome = "playlist_"+user+"_"+nomeInput
     if not os.path.exists(f"./arq_txt/playlists/{nome}.txt"):
         print("Playlist não encontrada.")
         return
