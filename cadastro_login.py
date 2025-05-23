@@ -128,6 +128,13 @@ def cadastro():
         # Fecha o arquivo pois e um 'with', mesmo que ocorra um erro
     print("Usuário cadastrado com sucesso!") # Mensagem de sucesso
 
+    # cria um arq txt para armazenar o nome das playlists criadas pelo user automaticamente ao criar sua conta
+    nome_playlist = f"playlists_{username}"
+    caminho_playlist = f"./arq_txt/playlists/{nome_playlist}.txt"
+    with open(caminho_playlist, "w") as arquivo_playlists:
+        arquivo_playlists.write(f"\n")
+
+
 def login():
     """
     Procurar um contato na agenda pelo nome.
