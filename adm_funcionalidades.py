@@ -78,6 +78,8 @@ def consultar_user():
         if user_name.lower() == nome[0].lower():
             print(f"Informacoes do usuario {user_name}: ")
             print("playlists: ")
+            playlists_user = open(f"./arq_txt/playlists/playlists_{user_name}.txt", "r")
+            conteudo = arquivo_users.readlines()
             
             print("-----------------")
             
