@@ -72,7 +72,7 @@ def buscar_musicas(user):
             elif escolha == 3: 
                 criar_playlist(user) 
             elif escolha == 4: 
-                adicionar_na_playlist() 
+                adicionar_na_playlist(user) 
             elif escolha == 0: # Sair
                 sair() # Chama a função sair
             else:
@@ -325,6 +325,19 @@ def gerenciar_playlist(user):
             sair()
         else:
             print("Opção inválida. Tente novamente.")
+
+
+def adicionar_na_playlist(user):
+    nome_playlist_input = input("digite o nome da playlist: ")
+    nome_playlist = "playlist_"+user+"_"+nome_playlist_input
+
+    caminho_playlist = f"./arq_txt/playlists/{nome_playlist}.txt"
+    nome_musica = input("Digite o nome da musica que deseja adicionar: ")
+
+    with open(caminho_playlist, "a") as arquivo:
+        arquivo.write(f"{nome_musica}\n")
+    print(f"Música '{nome_musica}' adicionada à playlist!")
+
 
 def sair():
     print("Saindo do programa...")
