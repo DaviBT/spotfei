@@ -26,7 +26,7 @@ def main_usuario(user):
     while True: # Loop infinito
         escolha = exibir_menu_usuario() # Chama a função exibir_menu e armazena a escolha do usuário
         if escolha == 1: # Buscar musicas
-            buscar_musicas() # Chama a função buscar_musicas
+            buscar_musicas(user) # Chama a função buscar_musicas
         elif escolha == 2: # Gerenciar playlist
             gerenciar_playlist(user) # Chama a função gerenciar_playlist
         elif escolha == 3: # Visualizar histórico
@@ -38,7 +38,7 @@ def main_usuario(user):
             main_usuario()
             # Mensagem de erro para opção inválida
             
-def buscar_musicas():
+def buscar_musicas(user):
     """
     Função para buscar musicas.
     """
@@ -61,17 +61,14 @@ def buscar_musicas():
             print(f"{opcao} - {descricao}")
         escolha = int(input("Escolha uma opção: ")) # Lê a opção escolhida pelo usuário, sem validar
         return escolha # Retorna a opção escolhida
-    def main_musica():
-        """
-        Função principal que exibe o menu e chama as funções correspondentes
-        de acordo com a escolha do usuário.
-        """
-        while True: # Loop infinito
-            escolha = exibir_menu_musica() 
-            if escolha == 1: 
-                curtir_musica() 
+    def main_musica(nome_musica, user):
+
+        while True:
+            escolha = exibir_menu_musica()
+            if escolha == 1:
+                curtir_musica(nome_musica, user)
             elif escolha == 2: 
-                descurtir_musica() 
+                descurtir_musica(nome_musica, user) 
             elif escolha == 3: 
                 criar_playlist() 
             elif escolha == 4: 
@@ -91,14 +88,123 @@ def buscar_musicas():
     # Procura o contato no arquivo
     for linha in conteudo: # Para cada linha no conteúdo do arquivo
         musica_nome, musica_artista, musica_duracao, musica_genero, curtidas, descurtidas = linha.strip().split(",") # Divide a linha em partes, separando por vírgula
-        if nome_musica.lower() == musica_nome.lower(): # Verifica se o nome procurado é igual ao nome do da musica, ignorando maiúsculas e minúsculas
-            print(f"Nome: {musica_nome}, Artista: {musica_artista}, Duração: {musica_duracao}, Gênero: {musica_genero}, Curtidas: {curtidas}, Descurtidas: {descurtidas}") # Exibe os dados da musica
-
+        if nome_musica.lower() == musica_nome.lower():
+            print(f"Nome: {musica_nome}, Artista: {musica_artista}, Duração: {musica_duracao}, Gênero: {musica_genero}, Curtidas: {curtidas}, Descurtidas: {descurtidas}")
+            main_musica(musica_nome, user)
+            break # Sai do loop
+           
             # mostra o menu da musica para o user, onde ele pode curtir, descurtir...
             print(main_musica())
             break # Sai do loop 
     else: # Se não encontrar a musica
         print("Música não encontrada.") # Mensagem de erro se a musica não for encontrada
+        
+def curtir_musica(nome_musica, user):
+    """
+    Função para curtir uma música.
+    Atualiza o número de curtidas em musicas.txt e adiciona ao arquivo de curtidas do usuário.
+    """
+    caminho_musicas = "./arq_txt/musicas.txt"
+    caminho_curtidas_user = f"./arq_txt/curtidas_{user}.txt"
+    caminho_descurtidas_user = f"./arq_txt/descurtidas_{user}.txt"
+
+    with open(caminho_musicas, "r") as arquivo:
+        conteudo = arquivo.readlines()
+
+    encontrou = False
+    for i, linha in enumerate(conteudo):
+        musica_nome, musica_artista, musica_duracao, musica_genero, curtidas, descurtidas = linha.strip().split(",")
+        if nome_musica.lower() == musica_nome.lower():
+            # Atualiza o número de curtidas
+            novas_curtidas = int(curtidas) + 1
+            conteudo[i] = f"{musica_nome},{musica_artista},{musica_duracao},{musica_genero},{novas_curtidas},{descurtidas}\n"
+            encontrou = True
+            break
+
+    if not encontrou:
+        print("Música não encontrada.")
+        return
+
+    # Salva o novo conteúdo em musicas.txt
+    with open(caminho_musicas, "w") as arquivo:
+        arquivo.writelines(conteudo)
+
+    try:
+        with open(caminho_descurtidas_user, "r") as arquivo:
+            musicas_descurtidas = [linha.strip().lower() for linha in arquivo.readlines()]
+        musicas_descurtidas = [m for m in musicas_descurtidas if m.lower() != nome_musica.lower()]
+        with open(caminho_descurtidas_user, "w") as arquivo:
+            for m in musicas_descurtidas:
+                arquivo.write(f"{m}\n")
+    except FileNotFoundError:
+        pass
+
+    try:
+        with open(caminho_curtidas_user, "r") as arquivo:
+            musicas_curtidas = [linha.strip().lower() for linha in arquivo.readlines()]
+    except FileNotFoundError:
+        musicas_curtidas = []
+
+    if nome_musica.lower() not in musicas_curtidas:
+        with open(caminho_curtidas_user, "a") as arquivo:
+            arquivo.write(f"{nome_musica}\n")
+        print(f"Música '{nome_musica}' curtida com sucesso!")
+    else:
+        print(f"Você já curtiu a música '{nome_musica}'.")
+    
+    
+def descurtir_musica(nome_musica,user):
+    
+    caminho_musicas = "./arq_txt/musicas.txt"
+    caminho_curtidas_user = f"./arq_txt/curtidas_{user}.txt"
+    caminho_descurtidas_user = f"./arq_txt/descurtidas_{user}.txt"
+
+    with open(caminho_musicas, "r") as arquivo:
+        conteudo = arquivo.readlines()
+
+    encontrou = False
+    for i, linha in enumerate(conteudo):
+        musica_nome, musica_artista, musica_duracao, musica_genero, curtidas, descurtidas = linha.strip().split(",")
+        if nome_musica.lower() == musica_nome.lower():
+            # Atualiza o número de curtidas
+            novas_curtidas = max(0, int(curtidas) - 1)
+            novas_descurtidas = int(descurtidas) + 1
+            conteudo[i] = f"{musica_nome},{musica_artista},{musica_duracao},{musica_genero},{novas_curtidas},{novas_descurtidas}\n"
+            encontrou = True
+            break
+
+    if not encontrou:
+        print("Música não encontrada.")
+        return
+
+    # Salva o novo conteúdo em musicas.txt
+    with open(caminho_musicas, "w") as arquivo:
+        arquivo.writelines(conteudo)
+
+    try:
+        with open(caminho_curtidas_user, "r") as arquivo:
+            musicas_curtidas = [linha.strip() for linha in arquivo.readlines()]
+        musicas_curtidas = [m for m in musicas_curtidas if m.lower() != nome_musica.lower()]
+        with open(caminho_curtidas_user, "w") as arquivo:
+            for m in musicas_curtidas:
+                arquivo.write(f"{m}\n")
+    except FileNotFoundError:
+        pass
+
+
+    # Adiciona à lista de descurtidas, se ainda não estiver
+    try:
+        with open(caminho_descurtidas_user, "r") as arquivo:
+            musicas_descurtidas = [linha.strip().lower() for linha in arquivo.readlines()]
+    except FileNotFoundError:
+        musicas_descurtidas = []
+
+    if nome_musica.lower() not in musicas_descurtidas:
+        with open(caminho_descurtidas_user, "a") as arquivo:
+            arquivo.write(f"{nome_musica}\n")
+        print(f"Música '{nome_musica}' descurtida com sucesso!")
+    else:
+        print(f"Você já descurtiu a música '{nome_musica}'.")
 
 import os
 

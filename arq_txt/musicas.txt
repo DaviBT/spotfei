@@ -1,2 +1,2 @@
-billie jean,michael jackson,3.09,pop,0,0
+billie jean,michael jackson,3.09,pop,0,9
 who shot ya,notorious big,4,rap,0,0
