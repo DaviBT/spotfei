@@ -136,7 +136,7 @@ def criar_playlist(user):
         arq_txt_todas_as_playlists.write(f"{nome_playlist}\n")
 
 def mostrar_musicas_playlist(nome_playlist):
-    caminho_playlist = f"./arq_txt/{nome_playlist}.txt"
+    caminho_playlist = f"./arq_txt/playlists/{nome_playlist}.txt"
     try:
         with open(caminho_playlist, "r") as arquivo:
             linhas = arquivo.readlines()
@@ -147,14 +147,14 @@ def mostrar_musicas_playlist(nome_playlist):
         print("Playlist não encontrada.")
 
 def adicionar_musica(nome_playlist):
-    caminho_playlist = f"./arq_txt/{nome_playlist}.txt"
+    caminho_playlist = f"../arq_txt/playlists/{nome_playlist}.txt"
     nome_musica = input("Digite o nome da musica que deseja adicionar: ")
     with open(caminho_playlist, "a") as arquivo:
         arquivo.write(f"{nome_musica}\n")
     print(f"Música '{nome_musica}' adicionada à playlist!")
 
 def remover_musica(nome_playlist):
-    caminho_playlist = f"./arq_txt/{nome_playlist}.txt"
+    caminho_playlist = f"./arq_txt/playlists/{nome_playlist}.txt"
     nome_musica = input("Digite o nome da musica que deseja remover: ")
     with open(caminho_playlist, "r") as arquivo:
         musicas = arquivo.readlines()
@@ -175,7 +175,7 @@ def visualizar_playlist(user):
     for pl in playlists:
         print(pl.replace(".txt", ""))
     nome = input("Digite o nome da playlist que deseja gerenciar: ").strip()
-    if not os.path.exists(f"./arq_txt/{nome}.txt"):
+    if not os.path.exists(f"./arq_txt/playlists/{nome}.txt"):
         print("Playlist não encontrada.")
         return
     mostrar_musicas_playlist(nome)
