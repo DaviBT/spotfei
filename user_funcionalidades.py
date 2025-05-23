@@ -117,9 +117,9 @@ def exibir_menu_playlist():
 def criar_playlist(user):
     nome_playlist = input(f"Digite o nome da nova playlist: {user}_")
     nome_playlist = "playlist_"+user+"_"+nome_playlist
-    caminho_playlist = f"./arq_txt/{nome_playlist}.txt"
+    caminho_playlist = f"./arq_txt/playlists/{nome_playlist}.txt"
     with open(caminho_playlist, "w") as arquivo_playlists:
-        arquivo_playlists.write(f"{nome_playlist}\n")
+        arquivo_playlists.write(f"\n")
         print(f"Playlist '{nome_playlist}' criada com sucesso!")
         print("Adicione músicas à sua playlist (digite 'fim' para parar):")
         while True:
@@ -128,6 +128,12 @@ def criar_playlist(user):
                 break
             arquivo_playlists.write(f"{musica}\n")
         print("Músicas adicionadas à playlist!")
+
+    # adicona nome da playlist ao arq txt contendo todas as playlists do user
+    nome_arq_txt_todas_as_playlists = f"playlists_{user}"
+    caminho_playlist_arq_txt_todas_as_playlists = f"./arq_txt/playlists/{nome_arq_txt_todas_as_playlists}.txt"
+    with open(caminho_playlist_arq_txt_todas_as_playlists, "w") as arq_txt_todas_as_playlists:
+        arq_txt_todas_as_playlists.write(f"{nome_playlist}\n")
 
 def mostrar_musicas_playlist(nome_playlist):
     caminho_playlist = f"./arq_txt/{nome_playlist}.txt"
