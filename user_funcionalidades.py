@@ -70,7 +70,7 @@ def buscar_musicas(user):
             elif escolha == 2: 
                 descurtir_musica(nome_musica, user) 
             elif escolha == 3: 
-                criar_playlist() 
+                criar_playlist(user) 
             elif escolha == 4: 
                 adicionar_na_playlist() 
             elif escolha == 0: # Sair
@@ -105,8 +105,8 @@ def curtir_musica(nome_musica, user):
     Atualiza o número de curtidas em musicas.txt e adiciona ao arquivo de curtidas do usuário.
     """
     caminho_musicas = "./arq_txt/musicas.txt"
-    caminho_curtidas_user = f"./arq_txt/curtidas_{user}.txt"
-    caminho_descurtidas_user = f"./arq_txt/descurtidas_{user}.txt"
+    caminho_curtidas_user = f"./arq_txt/curtidas/curtidas_{user}.txt"
+    caminho_descurtidas_user = f"./arq_txt/descurtidas/descurtidas_{user}.txt"
 
     with open(caminho_musicas, "r") as arquivo:
         conteudo = arquivo.readlines()
@@ -156,8 +156,8 @@ def curtir_musica(nome_musica, user):
 def descurtir_musica(nome_musica,user):
     
     caminho_musicas = "./arq_txt/musicas.txt"
-    caminho_curtidas_user = f"./arq_txt/curtidas_{user}.txt"
-    caminho_descurtidas_user = f"./arq_txt/descurtidas_{user}.txt"
+    caminho_curtidas_user = f"./arq_txt/curtidas/curtidas_{user}.txt"
+    caminho_descurtidas_user = f"./arq_txt/descurtidas/descurtidas_{user}.txt"
 
     with open(caminho_musicas, "r") as arquivo:
         conteudo = arquivo.readlines()
