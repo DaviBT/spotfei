@@ -184,7 +184,6 @@ def ver_estatisticas():
     print("")
     
     print("Top 5 musicas mais descurtidas: ")
-    print("\nTop 5 músicas com mais descurtidas:")
     # Top 5 mais descurtidas
     top_descurtidas = sorted(musicas, key=lambda x: x[3], reverse=True)[:5]
     for i, (nome, autor, _, descurtidas) in enumerate(top_descurtidas, start=1):
