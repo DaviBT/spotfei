@@ -30,13 +30,64 @@ def main_usuario(user):
         elif escolha == 2: # Gerenciar playlist
             gerenciar_playlist(user) # Chama a função gerenciar_playlist
         elif escolha == 3: # Visualizar histórico
-            visualizar_historico() # Chama a função visualizar_historico
+            visualizar_historico(user) # Chama a função visualizar_historico
         elif escolha == 0: # Sair
             sair() # Chama a função sair
         else:
             print("Opção inválida. Tente novamente.")
             main_usuario()
             # Mensagem de erro para opção inválida
+            
+            
+def visualizar_historico(user):
+    menu_historico = {
+        1: "Visualizar músicas curtidas",
+        2: "Visualizar músicas descurtidas",
+        0: "Sair"
+    }
+    
+    def exibir_menu_historico():
+        print("Menu:")
+        for opcao, descricao in menu_historico.items():
+            print(f"{opcao} - {descricao}")
+        escolha = int(input("Escolha uma opção: "))
+        return escolha
+    
+    def main_historico(user):
+        while True:
+            escolha = exibir_menu_historico()
+            if escolha == 1:
+                visualizar_musicas_curtidas(user)
+            elif escolha == 2:
+                visualizar_musicas_descurtidas(user)
+            elif escolha == 0:
+                sair()
+            else:
+                print("Opção inválida. Tente novamente.")
+                
+    def visualizar_musicas_curtidas(user):
+        caminho_curtidas_user = f"./arq_txt/curtidas/curtidas_{user}.txt"
+        try:
+            with open(caminho_curtidas_user, "r") as arquivo:
+                musicas_curtidas = [linha.strip() for linha in arquivo.readlines()]
+            print("Músicas curtidas:")
+            for musica in musicas_curtidas:
+                print(musica)
+        except FileNotFoundError:
+            print("Nenhuma música curtida encontrada.")
+            
+    def visualizar_musicas_descurtidas(user):
+        caminho_descurtidas_user = f"./arq_txt/descurtidas/descurtidas_{user}.txt"
+        try:
+            with open(caminho_descurtidas_user, "r") as arquivo:
+                musicas_descurtidas = [linha.strip() for linha in arquivo.readlines()]
+            print("Músicas descurtidas:")
+            for musica in musicas_descurtidas:
+                print(musica)
+        except FileNotFoundError:
+            print("Nenhuma música descurtida encontrada.")
+
+    main_historico(user)
             
 def buscar_musicas(user):
     """
@@ -159,6 +210,9 @@ def descurtir_musica(nome_musica,user):
     caminho_curtidas_user = f"./arq_txt/curtidas/curtidas_{user}.txt"
     caminho_descurtidas_user = f"./arq_txt/descurtidas/descurtidas_{user}.txt"
 
+    os.makedirs(os.path.dirname(caminho_descurtidas_user), exist_ok=True)
+    os.makedirs(os.path.dirname(caminho_curtidas_user), exist_ok=True)
+    
     with open(caminho_musicas, "r") as arquivo:
         conteudo = arquivo.readlines()
 
@@ -205,6 +259,7 @@ def descurtir_musica(nome_musica,user):
         print(f"Música '{nome_musica}' descurtida com sucesso!")
     else:
         print(f"Você já descurtiu a música '{nome_musica}'.")
+        
 
 import os
 
