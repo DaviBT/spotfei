@@ -152,17 +152,43 @@ def add_artista():
 
 def ver_estatisticas():
     print("")
-    print("Estatisticas do sistema: ")
+    print("Estatísticas do sistema: ")
     print("")
-    
-    print("Top 5 musicas com mais curtidas: ")
+
+    print("Top 5 músicas com mais curtidas: ")
+    musicas = []
+
+    # Abre e lê o arquivo
+    with open("./arq_txt/musicas.txt", "r") as arq_musicas:
+        conteudo = arq_musicas.readlines()
+
+    for linha in conteudo:
+        musica = linha.strip().split(",")
+        nome = musica[0]
+        autor = musica[1]
+        curtidas = int(musica[4])  # índice 4 e de curtidas
+        musicas.append((nome, autor, curtidas))
+
+    # Ordena por número de curtidas (ordem decrescente)
+    musicas.sort(key=lambda x: x[2], reverse=True)
+
+    # Mostra as 5 mais curtidas
+    for i, (nome, autor, curtidas) in enumerate(musicas[:5], start=1):
+        print(f"{i}. {nome} - {autor} ({curtidas} curtidas)")
+
+        
+
     
     print("")
     print("-------------")
     print("")
     
     print("Top 5 musicas mais descurtidas: ")
-
+    print("\nTop 5 músicas com mais descurtidas:")
+    # Top 5 mais descurtidas
+    top_descurtidas = sorted(musicas, key=lambda x: x[3], reverse=True)[:5]
+    for i, (nome, autor, _, descurtidas) in enumerate(top_descurtidas, start=1):
+        print(f"{i}. {nome} - {autor} ({descurtidas} descurtidas)")
     
     print("")
     print("-------------")
@@ -191,8 +217,6 @@ def ver_estatisticas():
     arq_musicas = open("./arq_txt/musicas.txt", "r")
     # cria uma lista com as musicas do arquivo
     musicas = arq_musicas.readlines()
-    m = 0
-
     for indice in musicas:
         m = m + 1
     print(m)
