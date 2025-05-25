@@ -183,10 +183,25 @@ def ver_estatisticas():
     print("-------------")
     print("")
     
-    print("Top 5 musicas mais descurtidas: ")
-    # Top 5 mais descurtidas
-    top_descurtidas = sorted(musicas, key=lambda x: x[3], reverse=True)[:5]
-    for i, (nome, autor, _, descurtidas) in enumerate(top_descurtidas, start=1):
+    print("Top 5 músicas mais descurtidas: ")
+    musicas_descurtidas = []
+
+    # Lê novamente o arquivo e carrega descurtidas
+    with open("./arq_txt/musicas.txt", "r") as arq_musicas:
+        conteudo = arq_musicas.readlines()
+
+    for linha in conteudo:
+        musica = linha.strip().split(",")
+        nome = musica[0]
+        autor = musica[1]
+        descurtidas = int(musica[5])  # índice 5 é descurtidas
+        musicas_descurtidas.append((nome, autor, descurtidas))
+
+    # Ordena por descurtidas (ordem decrescente)
+    musicas_descurtidas.sort(key=lambda x: x[2], reverse=True)
+
+    # Mostra top 5 descurtidas
+    for i, (nome, autor, descurtidas) in enumerate(musicas_descurtidas[:5], start=1):
         print(f"{i}. {nome} - {autor} ({descurtidas} descurtidas)")
     
     print("")
@@ -196,16 +211,12 @@ def ver_estatisticas():
     print("Quantidade de usuarios: ")
     # abre o arquivo no modo de leitura
     arq_users = open("./arq_txt/users.txt", "r")
-    # cria uma lista com as musicas do arquivo
+    # cria uma lista com os users do arquivo
     users = arq_users.readlines()
-
-    i = 0
-    for indice in users:
-        a = 0
-        i = i + 1
-    print(i)
-    
-        
+    quant_users = 0
+    for user in users:
+        quant_users = quant_users + 1
+    print(quant_users)
 
     print("")
     print("-------------")
@@ -216,7 +227,8 @@ def ver_estatisticas():
     arq_musicas = open("./arq_txt/musicas.txt", "r")
     # cria uma lista com as musicas do arquivo
     musicas = arq_musicas.readlines()
-    for indice in musicas:
-        m = m + 1
-    print(m)
+    qnt_musicas = 0
+    for musica in musicas:
+        qnt_musicas = qnt_musicas + 1
+    print(qnt_musicas)
     print("")
