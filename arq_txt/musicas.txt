@@ -1,11 +1,11 @@
 billie jean,michael jackson,3.09,pop,1,9
-who shot ya,notorious big,4,rap,5,4
+who shot ya,notorious big,4,rap,6,5
 bohemian rhapsody,queen,5.55,rock,1,10
 like a prayer,madonna,5.43,pop,1,9
 lose yourself,eminem,5.26,rap,4,10
 smells like teen spirit,nirvana,5.01,rock,9,9
 rolling in the deep,adele,3.48,pop,1,9
-hey ya!,outkast,3.55,rap,1,8
+hey ya!,outkast,3.55,rap,0,9
 hotel california,eagles,6.30,rock,8,10
 bad guy,billie eilish,3.14,pop,3,9
 juicy,notorious big,5.02,rap,7,8

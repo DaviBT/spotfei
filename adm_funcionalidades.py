@@ -66,33 +66,60 @@ def add_musica():
 def consultar_user():
     print("Consultar usuario")
     user_name = input("Digite o username do usuario: ")
-    # abre o arquivo de usuarios para leitura
-    arquivo_users = open("./arq_txt/users.txt", "r")
-    # Lê o conteúdo do arquivo
-    conteudo = arquivo_users.readlines()
-    # Fecha o arquivo
-    arquivo_users.close()
-    # Procura o user no arquivo
-    for i, linha in enumerate(conteudo):
-        user_name = linha.strip().split(",")
-        if user_name.lower() == nome[0].lower():
-            print(f"Informacoes do usuario {user_name}: ")
-            print("playlists: ")
-            playlists_user = open(f"./arq_txt/playlists/playlists_{user_name}.txt", "r")
-            conteudo = arquivo_users.readlines()
-            
-            print("-----------------")
-            
-            print("musicas curtidas: ")
-            
-            print("-----------------")
-            
-            print("musicas descurtidas: ")
 
-            print("-----------------")
-        else:
-            print("usuario nao encontrado")
-            exibir_menu_adm() # volta para o menu em caso de erro
+
+    # musicas curtidas -------------
+
+    # abre o arquivo para leitura
+    arquivo_curtidas = open(f"./arq_txt/curtidas/curtidas_{user_name}.txt", "r")
+    # Lê o conteúdo do arquivo
+    curtidas = arquivo_curtidas.readlines()
+    # Fecha o arquivo
+    arquivo_curtidas.close()
+    musica = []
+    for linha in curtidas:
+        musica.append(linha.strip())
+    print(f"musicas curtidas: {musica}")
+
+    print("-----------------")
+
+    # musicas descurtidas -------------
+
+    # abre o arquivo para leitura
+    arquivo_descurtidas = open(f"./arq_txt/descurtidas/descurtidas_{user_name}.txt", "r")
+    # Lê o conteúdo do arquivo
+    descurtidas = arquivo_descurtidas.readlines()
+    # Fecha o arquivo
+    arquivo_descurtidas.close()
+    musicas_descurtidas = []
+    for descurtida in descurtidas:
+        musicas_descurtidas.append(descurtida.strip())
+    print(f"musicas descurtidas: {musicas_descurtidas}")
+            
+            
+            
+    print("-----------------")
+
+
+    # playlists -------------
+
+    # abre o arquivo para leitura
+    arq_playlists = open(f"./arq_txt/playlists/playlists_{user_name}.txt", "r")
+    # Lê o conteúdo do arquivo
+    playlists_array = arq_playlists.readlines()
+    # Fecha o arquivo
+    arq_playlists.close()
+    playlists = []
+    for playlist in playlists_array:
+        nome_playlist = playlist.strip().split("_")
+        playlist = nome_playlist[2]
+        playlists.append(playlist)
+        nome_playlist = []
+    print(f"playlists do usuario: {playlists}")
+            
+            
+            
+    print("-----------------")
             
 
 def excluir_musica():
